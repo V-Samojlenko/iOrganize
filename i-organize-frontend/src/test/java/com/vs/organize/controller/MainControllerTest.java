@@ -26,5 +26,4 @@ public class MainControllerTest {
     this.mvc.perform(get("/index")).andExpect(status().isOk())
             .andExpect(content().string(org.hamcrest.Matchers.containsString("Hello World!")));
   }
-  
 }
