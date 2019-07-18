@@ -14,7 +14,8 @@
   </properties>
 
   <modules>
-    <module>i-organize-frontend</module>
+    <module>iOrganize-frontend</module>
+    <module>iOrganize-beans</module>
   </modules>
 
   <dependencyManagement>
