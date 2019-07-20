@@ -1,13 +1,15 @@
-package com.vs.organize.beans;
+package com.vs.organize.node.domains;
 
+import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by Vlad on 18.07.2019.
- */
+@Entity
 public class BoardDomain {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private String name;
+  @OneToMany
   private List<GroupDomain> groups;
 
   public long getId() {

@@ -1,4 +1,4 @@
-package com.vs.organize.controller;
+package com.vs.organize.node.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

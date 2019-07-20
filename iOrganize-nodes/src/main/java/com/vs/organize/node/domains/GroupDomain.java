@@ -1,15 +1,17 @@
-package com.vs.organize.beans;
+package com.vs.organize.node.domains;
 
+import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by Vlad on 18.07.2019.
- */
+@Entity
 public class GroupDomain {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private String style;
   private int placement;
   private int width;
+  @OneToMany
   private List<NodeDomain> nodes;
 
   public String getStyle() {
@@ -42,5 +44,13 @@ public class GroupDomain {
 
   public void setNodes(List<NodeDomain> nodes) {
     this.nodes = nodes;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 }

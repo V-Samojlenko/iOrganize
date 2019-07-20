@@ -3,6 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.6.RELEASE</version>
+  </parent>
 
   <groupId>com.vs.organize</groupId>
   <artifactId>iOrganize</artifactId>
@@ -15,7 +20,7 @@
 
   <modules>
     <module>iOrganize-frontend</module>
-    <module>iOrganize-beans</module>
+    <module>iOrganize-nodes</module>
   </modules>
 
   <dependencyManagement>

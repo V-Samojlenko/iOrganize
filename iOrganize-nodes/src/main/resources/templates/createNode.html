@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create node template</title>
+</head>
+<body>
+<!--@thymesVar id="node" type="com.vs.organize.node.forms.NodeForm"-->
+<form action="#" th:action="@{/node-api/create}" th:object="${node}" method="post">
+  <input type="hidden" name="boardId" th:field="*{boardId}"/>
+  <input type="hidden" name="groupId" th:field="*{groupId}"/>
+  <input type="text" name="title" th:field="*{title}"/>
+  <textarea th:field="*{text}"/>
+  <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

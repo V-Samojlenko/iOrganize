@@ -1,3 +1,4 @@
+<!--@thymesVar id="node" type="com.vs.organize.node.forms.NodeForm"-->
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -5,6 +6,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-  <p th:text="'Hello World!'"/>
+<p th:text="'Hello World!'"/>
+
+<form action="#" th:action="@{/node-api/create}" th:object="${node}" method="post">
+  <input type="text" name="title" th:field="*{title}"/>
+  <textarea th:field="*{text}"/>
+  <input type="submit" value="Submit"/>
+</form>
+
 </body>
 </html>
