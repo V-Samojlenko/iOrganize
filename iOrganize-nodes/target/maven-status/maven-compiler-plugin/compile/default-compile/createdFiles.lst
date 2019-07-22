@@ -1,3 +1,5 @@
+com\vs\organize\node\forms\GroupForm.class
+com\vs\organize\node\domains\GroupDomain.class
 com\vs\organize\node\domains\BoardDomain.class
 com\vs\organize\node\service\NodeService.class
 com\vs\organize\node\DatabaseConfiguration.class
@@ -5,4 +7,3 @@ com\vs\organize\node\forms\NodeForm.class
 com\vs\organize\node\database\BoardRepository.class
 com\vs\organize\node\domains\NodeDomain.class
 com\vs\organize\node\controller\NodeController.class
-com\vs\organize\node\domains\GroupDomain.class
