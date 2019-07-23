@@ -1,6 +1,9 @@
 package com.vs.organize.node.domains;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.List;
 
 @Entity
@@ -12,7 +15,15 @@ public class GroupDomain {
   private int placement;
   private int width;
   @OneToMany
+  @Cascade(org.hibernate.annotations.CascadeType.ALL)
   private List<NodeDomain> nodes;
+
+  public GroupDomain(List<NodeDomain> nodes) {
+    this.nodes = nodes;
+  }
+
+  public GroupDomain() {
+  }
 
   public String getStyle() {
     return style;

@@ -1,3 +1,14 @@
-<p>
-  Willkommen auf dem "{{board.name}}"
-</p>
+<div class="board">
+    <h1>Willkommen auf dem "{{board.name}}"</h1>
+
+    <div class="board-group-container">
+        <div *ngFor="let group of board.groups">
+            <div class="group">
+                <div cdkDropList class="nodes" >
+                    <div class="node" cdkDrag *ngFor="let node of group.nodes">{{node.title}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

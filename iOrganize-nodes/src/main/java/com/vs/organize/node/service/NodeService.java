@@ -39,7 +39,7 @@ public class NodeService {
     if(boardId != null){
       return boardRepository.findById(Long.parseLong(boardId)).orElse(null);
     }else{
-      return boardRepository.findById(0l).orElse(null);
+      return boardRepository.findAll().iterator().next();
     }
   }
 }

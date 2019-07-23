@@ -13,6 +13,14 @@ public class NodeDomain {
   private String title;
   private String text;
 
+  public NodeDomain(String title, String text) {
+    this.title = title;
+    this.text = text;
+  }
+
+  public NodeDomain() {
+  }
+
   public long getId() {
     return id;
   }

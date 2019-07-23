@@ -1,6 +1,10 @@
 package com.vs.organize.node.domains;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.List;
 
 @Entity
@@ -10,6 +14,7 @@ public class BoardDomain {
   private long id;
   private String name;
   @OneToMany
+  @Cascade(CascadeType.ALL)
   private List<GroupDomain> groups;
 
   public long getId() {
