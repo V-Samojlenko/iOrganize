@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   imports: [
+    DragDropModule,
     HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,

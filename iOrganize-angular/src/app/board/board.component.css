@@ -1,11 +1,12 @@
 .group{
     border: solid #004085 1px;
     float: left;
-    min-width: 40px;
+    min-width: 10%;
     margin: 10px;
+    background-color: #adb5bd;
 }
 .nodes .node{
-    margin: 2px;
+    margin: 15px;
     background-color: #abdde5;
-    cursor: hand;
+    cursor: move;
 }
