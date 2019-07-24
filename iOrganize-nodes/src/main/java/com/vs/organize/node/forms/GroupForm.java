@@ -1,25 +1,36 @@
 package com.vs.organize.node.forms;
 
+import java.util.List;
+
 /**
  * Created by Vlad on 20.07.2019.
  */
 public class GroupForm {
-  long boardId;
-  long groupId;
+  private String name;
+  private long id;
+  private List<Long> nodeIds;
 
-  public long getBoardId() {
-    return boardId;
+  public long getId() {
+    return id;
   }
 
-  public void setBoardId(long boardId) {
-    this.boardId = boardId;
+  public void setId(long id) {
+    this.id = id;
   }
 
-  public long getGroupId() {
-    return groupId;
+  public String getName() {
+    return name;
   }
 
-  public void setGroupId(long groupId) {
-    this.groupId = groupId;
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public List<Long> getNodeIds() {
+    return nodeIds;
+  }
+
+  public void setNodeIds(List<Long> nodeIds) {
+    this.nodeIds = nodeIds;
   }
 }

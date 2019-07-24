@@ -1,17 +1,30 @@
 package com.vs.organize.node.service;
 
 import com.vs.organize.node.database.BoardRepository;
+import com.vs.organize.node.database.GroupRepository;
+import com.vs.organize.node.database.NodeRepository;
 import com.vs.organize.node.domains.BoardDomain;
 import com.vs.organize.node.domains.GroupDomain;
 import com.vs.organize.node.domains.NodeDomain;
+import com.vs.organize.node.forms.GroupForm;
 import com.vs.organize.node.forms.NodeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Component
 public class NodeService {
   @Autowired
   private BoardRepository boardRepository;
+  @Autowired
+  private GroupRepository groupRepository;
+  @Autowired
+  private NodeRepository nodeRepository;
 
   /**
    * look for board and group in which node should be placed.
@@ -39,7 +52,23 @@ public class NodeService {
     if(boardId != null){
       return boardRepository.findById(Long.parseLong(boardId)).orElse(null);
     }else{
-      return boardRepository.findAll().iterator().next();
+      return boardRepository.findAll().get(0);
+    }
+  }
+
+  public GroupDomain updateGroup(GroupForm groupForm) {
+    Optional<GroupDomain> byId = groupRepository.findById(groupForm.getId());
+    if(byId.isPresent()){
+      GroupDomain groupDomain = byId.get();
+      groupDomain.setName(groupForm.getName());
+      new ArrayList<>(groupDomain.getNodes()).stream().forEach(n -> {
+        if(!groupForm.getNodeIds().contains(n.getId())){
+          groupDomain.getNodes().remove(n);
+        }else {
+          groupForm.getNodeIds().remove(n.getId());
+        }
+      });
+
     }
   }
 }
