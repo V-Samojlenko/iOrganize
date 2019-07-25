@@ -17,6 +17,7 @@ public class GroupDomain {
   @OneToMany
   @Cascade(org.hibernate.annotations.CascadeType.ALL)
   private List<NodeDomain> nodes;
+  private String name;
 
   public GroupDomain(List<NodeDomain> nodes) {
     this.nodes = nodes;
@@ -63,5 +64,13 @@ public class GroupDomain {
 
   public void setId(long id) {
     this.id = id;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
   }
 }

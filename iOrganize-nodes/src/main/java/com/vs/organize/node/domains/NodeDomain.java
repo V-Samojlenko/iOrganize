@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class NodeDomain {
   @Id
-  @GeneratedValue(strategy= GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private String title;
   private String text;
@@ -19,6 +19,10 @@ public class NodeDomain {
   }
 
   public NodeDomain() {
+  }
+
+  public NodeDomain(long id) {
+    this.id = id;
   }
 
   public long getId() {

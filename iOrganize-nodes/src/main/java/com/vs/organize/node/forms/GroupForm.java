@@ -10,6 +10,13 @@ public class GroupForm {
   private long id;
   private List<Long> nodeIds;
 
+  public GroupForm() {
+  }
+
+  public GroupForm(List<Long> nodeIds) {
+    this.nodeIds = nodeIds;
+  }
+
   public long getId() {
     return id;
   }

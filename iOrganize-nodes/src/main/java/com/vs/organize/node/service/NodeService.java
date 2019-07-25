@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -49,26 +51,40 @@ public class NodeService {
   }
 
   public BoardDomain getBoard(String boardId) {
-    if(boardId != null){
+    if (boardId != null) {
       return boardRepository.findById(Long.parseLong(boardId)).orElse(null);
-    }else{
+    } else {
       return boardRepository.findAll().get(0);
     }
   }
 
   public GroupDomain updateGroup(GroupForm groupForm) {
     Optional<GroupDomain> byId = groupRepository.findById(groupForm.getId());
-    if(byId.isPresent()){
+    if (byId.isPresent()) {
       GroupDomain groupDomain = byId.get();
       groupDomain.setName(groupForm.getName());
-      new ArrayList<>(groupDomain.getNodes()).stream().forEach(n -> {
-        if(!groupForm.getNodeIds().contains(n.getId())){
-          groupDomain.getNodes().remove(n);
-        }else {
-          groupForm.getNodeIds().remove(n.getId());
-        }
-      });
-
+      groupDomain.setNodes(getNodeList(groupDomain.getNodes(), groupForm.getNodeIds()));
     }
+    return byId.orElse(null);
+  }
+
+  protected List<NodeDomain> getNodeList(List<NodeDomain> existingNodes, List<Long> ids) {
+    Map<Long, NodeDomain> lookUp = existingNodes.stream().collect(Collectors.toMap(g -> g.getId(), Function.identity()));
+    return ids.stream().map(id -> {
+      if (lookUp.containsKey(id)) return lookUp.get(id);
+      return nodeRepository.findById(id).orElse(null);
+    }).collect(Collectors.toList());
+  }
+
+  public void setBoardRepository(BoardRepository boardRepository) {
+    this.boardRepository = boardRepository;
+  }
+
+  public void setGroupRepository(GroupRepository groupRepository) {
+    this.groupRepository = groupRepository;
+  }
+
+  public void setNodeRepository(NodeRepository nodeRepository) {
+    this.nodeRepository = nodeRepository;
   }
 }

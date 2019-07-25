@@ -25,8 +25,8 @@ public class NodeController {
   @RequestMapping("/get-create")
   public String getCreateNode(@ModelAttribute GroupForm group, Model model) {
     NodeForm nodeForm = new NodeForm();
-    nodeForm.setBoardId(group.getBoardId());
-    nodeForm.setGroupId(group.getGroupId());
+    nodeForm.setBoardId(group.getId());
+    nodeForm.setGroupId(0);
     model.addAttribute("node", nodeForm);
     return "createNode";
   }
