@@ -62,8 +62,11 @@ public class NodeService {
     Optional<GroupDomain> byId = groupRepository.findById(groupForm.getId());
     if (byId.isPresent()) {
       GroupDomain groupDomain = byId.get();
-      groupDomain.setName(groupForm.getName());
+      if (groupForm.getName() != null) {
+        groupDomain.setName(groupForm.getName());
+      }
       groupDomain.setNodes(getNodeList(groupDomain.getNodes(), groupForm.getNodeIds()));
+      groupRepository.save(groupDomain);
     }
     return byId.orElse(null);
   }

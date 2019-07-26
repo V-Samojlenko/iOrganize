@@ -1,9 +1,11 @@
 /home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/controller/NodeController.java
 /home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/service/NodeService.java
 /home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/domains/NodeDomain.java
-/home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/DatabaseConfiguration.java
 /home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/forms/NodeForm.java
 /home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/domains/GroupDomain.java
+/home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/DatabaseConfiguration.java
+/home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/database/GroupRepository.java
 /home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/forms/GroupForm.java
 /home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/domains/BoardDomain.java
+/home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/database/NodeRepository.java
 /home/vsamojlenko/projects-ram/another-trello-clone/iOrganize-nodes/src/main/java/com/vs/organize/node/database/BoardRepository.java

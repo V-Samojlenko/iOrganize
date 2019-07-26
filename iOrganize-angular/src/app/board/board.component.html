@@ -1,11 +1,14 @@
 <div class="board" *ngIf="board != null">
     <h1>Willkommen auf dem "{{board.name}}"</h1>
 
-    <div class="board-group-container">
-        <div *ngFor="let group of board.groups">
+    <div class="board-group-container" cdkDropListGroup>
+        <div *ngFor="let group of board.groups" >
+            <h2>{{group.name}}</h2>
             <div class="group">
-                <div cdkDropList class="nodes" >
-                    <div class="node" cdkDrag *ngFor="let node of group.nodes">{{node.title}}</div>
+                <div cdkDropList
+                     [cdkDropListData]="group.nodes"
+                     id="group-{{group.id}}" class="nodes" (cdkDropListDropped)="drop($event)">
+                    <div id="node-{{node.id}}" class="node" cdkDrag *ngFor="let node of group.nodes">{{node.title}}</div>
                 </div>
             </div>
         </div>

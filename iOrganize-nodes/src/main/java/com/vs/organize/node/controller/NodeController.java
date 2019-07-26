@@ -44,10 +44,9 @@ public class NodeController {
     return new Gson().toJson(nodeService.getBoard(boardId));
   }
 
-  @RequestMapping(value = "/group", produces = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(value = "/group", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public String putGroup(@ModelAttribute GroupForm groupForm,HttpServletRequest request) {
+  public String putGroup(@RequestBody GroupForm groupForm,HttpServletRequest request) {
     return new Gson().toJson(nodeService.updateGroup(groupForm));
   }
-
 }

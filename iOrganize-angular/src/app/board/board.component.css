@@ -1,7 +1,7 @@
 .group{
     border: solid #004085 1px;
     float: left;
-    min-width: 10%;
+    min-width: 15%;
     margin: 10px;
     background-color: #adb5bd;
 }
@@ -9,4 +9,6 @@
     margin: 15px;
     background-color: #abdde5;
     cursor: move;
+    text-align: center;
+
 }

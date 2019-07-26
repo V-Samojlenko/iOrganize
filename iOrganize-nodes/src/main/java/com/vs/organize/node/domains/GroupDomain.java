@@ -5,6 +5,7 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class GroupDomain {
