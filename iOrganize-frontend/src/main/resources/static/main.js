@@ -104,12 +104,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _board_board_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./board/board.component */ "./src/app/board/board.component.ts");
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
+/* harmony import */ var _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./create-node/create-node.component */ "./src/app/create-node/create-node.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -129,6 +132,7 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot([
                     { path: '', component: _board_board_component__WEBPACK_IMPORTED_MODULE_7__["BoardComponent"] },
                 ])
@@ -136,7 +140,8 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
                 _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"],
-                _board_board_component__WEBPACK_IMPORTED_MODULE_7__["BoardComponent"]
+                _board_board_component__WEBPACK_IMPORTED_MODULE_7__["BoardComponent"],
+                _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__["CreateNodeComponent"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
@@ -171,7 +176,7 @@ module.exports = ".group{\n    border: solid #004085 1px;\n    float: left;\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n    <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n    <div class=\"board-group-container\" cdkDropListGroup>\n        <div *ngFor=\"let group of board.groups\" >\n            <h2>{{group.name}}</h2>\n            <div class=\"group\">\n                <div cdkDropList\n                     [cdkDropListData]=\"group.nodes\"\n                     id=\"group-{{group.id}}\" class=\"nodes\" (cdkDropListDropped)=\"drop($event)\">\n                    <div id=\"node-{{node.id}}\" class=\"node\" cdkDrag *ngFor=\"let node of group.nodes\">{{node.title}}</div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"board-group-container\" cdkDropListGroup>\n    <div *ngFor=\"let group of board.groups\">\n      <h2>{{group.name}}</h2>\n      <div class=\"group\">\n        <div cdkDropList\n             [cdkDropListData]=\"group\"\n             id=\"group-{{group.id}}\" class=\"nodes\" (cdkDropListDropped)=\"drop($event)\">\n          <div id=\"node-{{node.id}}\" class=\"node\" cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n\n            {{node.title}}\n          </div>\n        </div>\n        <app-create-node [group]=\"group\"></app-create-node>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -186,8 +191,8 @@ module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n    <h1>Willkom
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BoardComponent", function() { return BoardComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
+/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
+/* harmony import */ var _rest_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../rest.service */ "./src/app/rest.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -202,43 +207,23 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var BoardComponent = /** @class */ (function () {
-    function BoardComponent(http) {
-        this.http = http;
-        this.apiUrl = "http://localhost:8080/node-api/";
-        this.httpClient = http;
+    function BoardComponent(restService) {
+        this.restService = restService;
+        this._restService = restService;
     }
     BoardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var boardObs = this.httpClient.get(this.apiUrl + "board");
-        boardObs.subscribe(function (data) { return _this.board = data; });
+        this.restService.getBoard(1).subscribe(function (data) { return _this.board = data; });
     };
     BoardComponent.prototype.drop = function (event) {
         if (event.previousContainer === event.container) {
-            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_2__["moveItemInArray"])(event.container.data, event.previousIndex, event.currentIndex);
+            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(event.container.data.nodes, event.previousIndex, event.currentIndex);
         }
         else {
-            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_2__["transferArrayItem"])(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-            var newGroup = this.findGroup(event.previousContainer.id);
-            if (newGroup != null)
-                this.updateGroup(newGroup).subscribe();
+            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["transferArrayItem"])(event.previousContainer.data.nodes, event.container.data.nodes, event.previousIndex, event.currentIndex);
+            this.restService.updateGroup(event.container.data).subscribe();
         }
-        var group = this.findGroup(event.container.id);
-        if (group != null)
-            this.updateGroup(group).subscribe();
-    };
-    BoardComponent.prototype.updateGroup = function (group) {
-        var ids = group.nodes.map(function (n) { return n.id; });
-        return this.httpClient.put(this.apiUrl + "group", {
-            "id": group.id,
-            "name": group.name,
-            "nodeIds": ids
-        });
-    };
-    BoardComponent.prototype.findGroup = function (id) {
-        var cleanId = new Number(id.replace("group-", ""));
-        return this.board.groups.find(function (group) {
-            return group.id == cleanId;
-        });
+        this.restService.updateGroup(event.previousContainer.data).subscribe();
     };
     BoardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -247,9 +232,104 @@ var BoardComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./board.component.css */ "./src/app/board/board.component.css")]
         }),
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+        __metadata("design:paramtypes", [_rest_service__WEBPACK_IMPORTED_MODULE_2__["RestService"]])
     ], BoardComponent);
     return BoardComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/create-node/create-node.component.css":
+/*!*******************************************************!*\
+  !*** ./src/app/create-node/create-node.component.css ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NyZWF0ZS1ub2RlL2NyZWF0ZS1ub2RlLmNvbXBvbmVudC5jc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/create-node/create-node.component.html":
+/*!********************************************************!*\
+  !*** ./src/app/create-node/create-node.component.html ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"create-node-wrapper\" [ngSwitch]=\"createOpen\">\n  <div class=\"create-node\" *ngSwitchCase=\"false\">\n    <button (click)=\"createNodeCreate()\">create</button>\n  </div>\n  <div class=\"create-node-form\" *ngSwitchCase=\"true\">\n      <input type=\"text\" [(ngModel)]=\"node.title\"  name=\"title\" (keydown)=\"onKeydown($event)\">\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/create-node/create-node.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/create-node/create-node.component.ts ***!
+  \******************************************************/
+/*! exports provided: CreateNodeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateNodeComponent", function() { return CreateNodeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _model_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/group */ "./src/app/model/group.ts");
+/* harmony import */ var _model_node__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/node */ "./src/app/model/node.ts");
+/* harmony import */ var _rest_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../rest.service */ "./src/app/rest.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var CreateNodeComponent = /** @class */ (function () {
+    function CreateNodeComponent(restService) {
+        this.createOpen = false;
+        this._restService = restService;
+        this.node = new _model_node__WEBPACK_IMPORTED_MODULE_2__["Node"]();
+    }
+    CreateNodeComponent.prototype.ngOnInit = function () {
+    };
+    CreateNodeComponent.prototype.createNode = function () {
+        var _this = this;
+        this.node.groupId = this.group.id;
+        this._restService.createNode(this.node).subscribe(function (data) { return _this.group.nodes.push(data); });
+        this.node = new _model_node__WEBPACK_IMPORTED_MODULE_2__["Node"]();
+        this.createOpen = false;
+    };
+    CreateNodeComponent.prototype.createNodeCreate = function () {
+        this.createOpen = true;
+    };
+    CreateNodeComponent.prototype.onKeydown = function (event) {
+        if (event.key === "Enter") {
+            this.createNode();
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _model_group__WEBPACK_IMPORTED_MODULE_1__["Group"])
+    ], CreateNodeComponent.prototype, "group", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _model_node__WEBPACK_IMPORTED_MODULE_2__["Node"])
+    ], CreateNodeComponent.prototype, "node", void 0);
+    CreateNodeComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-create-node',
+            template: __webpack_require__(/*! ./create-node.component.html */ "./src/app/create-node/create-node.component.html"),
+            styles: [__webpack_require__(/*! ./create-node.component.css */ "./src/app/create-node/create-node.component.css")]
+        }),
+        __metadata("design:paramtypes", [_rest_service__WEBPACK_IMPORTED_MODULE_3__["RestService"]])
+    ], CreateNodeComponent);
+    return CreateNodeComponent;
 }());
 
 
@@ -313,6 +393,102 @@ var HeaderComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], HeaderComponent);
     return HeaderComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/model/group.ts":
+/*!********************************!*\
+  !*** ./src/app/model/group.ts ***!
+  \********************************/
+/*! exports provided: Group */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Group", function() { return Group; });
+var Group = /** @class */ (function () {
+    function Group() {
+    }
+    return Group;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/model/node.ts":
+/*!*******************************!*\
+  !*** ./src/app/model/node.ts ***!
+  \*******************************/
+/*! exports provided: Node */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Node", function() { return Node; });
+var Node = /** @class */ (function () {
+    function Node() {
+    }
+    return Node;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/rest.service.ts":
+/*!*********************************!*\
+  !*** ./src/app/rest.service.ts ***!
+  \*********************************/
+/*! exports provided: RestService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RestService", function() { return RestService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var RestService = /** @class */ (function () {
+    function RestService(http) {
+        this.http = http;
+        this._apiUrl = "http://localhost:8080/node-api/";
+        this._httpClient = http;
+    }
+    RestService.prototype.getBoard = function (id) {
+        return this._httpClient.get(this._apiUrl + "board?id=" + id);
+    };
+    RestService.prototype.updateGroup = function (group) {
+        var ids = group.nodes.map(function (n) { return n.id; });
+        return this._httpClient.put(this._apiUrl + "group", {
+            "id": group.id,
+            "name": group.name,
+            "nodeIds": ids
+        });
+    };
+    RestService.prototype.createNode = function (node) {
+        return this._httpClient.post(this._apiUrl + "node", node);
+    };
+    RestService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], RestService);
+    return RestService;
 }());
 
 

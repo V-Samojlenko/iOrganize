@@ -1,0 +1,8 @@
+<div class="create-node-wrapper" [ngSwitch]="createOpen">
+  <div class="create-node" *ngSwitchCase="false">
+    <button (click)="createNodeCreate()">create</button>
+  </div>
+  <div class="create-node-form" *ngSwitchCase="true">
+      <input type="text" [(ngModel)]="node.title"  name="title" (keydown)="onKeydown($event)">
+  </div>
+</div>

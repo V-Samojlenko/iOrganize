@@ -22,31 +22,22 @@ public class NodeController {
   @Autowired
   private NodeService nodeService;
 
-  @RequestMapping("/get-create")
-  public String getCreateNode(@ModelAttribute GroupForm group, Model model) {
-    NodeForm nodeForm = new NodeForm();
-    nodeForm.setBoardId(group.getId());
-    nodeForm.setGroupId(0);
-    model.addAttribute("node", nodeForm);
-    return "createNode";
-  }
-
-  @RequestMapping("/create")
-  public String createNode(@ModelAttribute NodeForm node, ModelAndView model) {
+  @PostMapping(value = "/node",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseBody
+  public String createNode(@RequestBody NodeForm node) {
     NodeDomain nodeDomain = nodeService.create(node);
-    model.addObject("mode", nodeDomain);
-    return "node";
+    return new Gson().toJson(nodeDomain);
   }
 
   @GetMapping(value = "/board", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public String getBoard(@RequestParam(required = false) String boardId,HttpServletRequest request) {
-    return new Gson().toJson(nodeService.getBoard(boardId));
+  public String getBoard(@RequestParam long id) {
+    return new Gson().toJson(nodeService.getBoard(id));
   }
 
   @PutMapping(value = "/group", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public String putGroup(@RequestBody GroupForm groupForm,HttpServletRequest request) {
+  public String putGroup(@RequestBody GroupForm groupForm, HttpServletRequest request) {
     return new Gson().toJson(nodeService.updateGroup(groupForm));
   }
 }

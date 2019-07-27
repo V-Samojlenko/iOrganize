@@ -35,27 +35,21 @@ public class NodeService {
    * @return
    */
   public NodeDomain create(NodeForm form) {
-    BoardDomain boardDomain = boardRepository.findById(form.getBoardId()).orElseGet(null);
-    if (boardDomain != null && !boardDomain.getGroups().isEmpty()) {
-      //TODO Maybe just get group?
-      GroupDomain groupDomain = boardDomain.getGroups().stream().filter(g -> g.getId() == form.getBoardId()).findAny().orElse(null);
-      if (groupDomain != null) {
-        //TODO We have to find and set user
-        NodeDomain transform = form.transform();
-        groupDomain.getNodes().add(transform);
-        boardRepository.save(boardDomain);
-        return transform;
-      }
+    GroupDomain groupDomain = groupRepository.findById(form.getGroupId()).orElseGet(null);
+    if (groupDomain != null) {
+      //TODO We have to find and set user
+      NodeDomain transform = form.transform();
+      groupDomain.getNodes().add(transform);
+      nodeRepository.save(transform);
+      groupRepository.save(groupDomain);
+      return transform;
+
     }
     return null;
   }
 
-  public BoardDomain getBoard(String boardId) {
-    if (boardId != null) {
-      return boardRepository.findById(Long.parseLong(boardId)).orElse(null);
-    } else {
-      return boardRepository.findAll().get(0);
-    }
+  public BoardDomain getBoard(long boardId) {
+    return boardRepository.findById(boardId).orElse(null);
   }
 
   public GroupDomain updateGroup(GroupForm groupForm) {

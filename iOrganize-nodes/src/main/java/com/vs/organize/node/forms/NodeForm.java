@@ -4,20 +4,11 @@ package com.vs.organize.node.forms;
 import com.vs.organize.node.domains.NodeDomain;
 
 public class NodeForm {
-  private long boardId;
   private long groupId;
   private long userId;
 
   private String title;
   private String text;
-
-  public long getBoardId() {
-    return boardId;
-  }
-
-  public void setBoardId(long boardId) {
-    this.boardId = boardId;
-  }
 
   public long getGroupId() {
     return groupId;

@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { HeaderComponent } from './header/header.component';
+import { CreateNodeComponent } from './create-node/create-node.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: BoardComponent },
     ])
@@ -23,7 +26,8 @@ import { HeaderComponent } from './header/header.component';
 
     AppComponent,
     HeaderComponent,
-    BoardComponent
+    BoardComponent,
+    CreateNodeComponent
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Board} from '../model/board';
 import {Node} from '../model/node';
-import {Observable} from 'rxjs/Observable';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Group} from "../model/group";
+import {RestService} from "../rest.service";
 
 @Component({
   selector: 'app-board',
@@ -15,49 +14,27 @@ import {Group} from "../model/group";
 
 @Injectable()
 export class BoardComponent implements OnInit {
-  private boardUrl: string;
-  private apiUrl: string = "http://localhost:8080/node-api/";
   public board: Board;
-  private httpClient: HttpClient;
+  private _restService: RestService;
 
-  constructor(private http: HttpClient) {
-    this.httpClient = http;
+  constructor(private restService: RestService) {
+    this._restService = restService;
   }
 
   ngOnInit() {
-    var boardObs: Observable<Board> = this.httpClient.get<Board>(this.apiUrl + "board");
-    boardObs.subscribe(data => this.board = data);
+    this.restService.getBoard(1).subscribe(data => this.board = data);
   }
 
-  drop(event: CdkDragDrop<Node[]>) {
+  drop(event: CdkDragDrop<Group>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(event.container.data.nodes, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data,
-          event.container.data,
+      transferArrayItem(event.previousContainer.data.nodes,
+          event.container.data.nodes,
           event.previousIndex,
           event.currentIndex);
-      const newGroup = this.findGroup(event.previousContainer.id);
-      if (newGroup != null) this.updateGroup(newGroup).subscribe();
+      this.restService.updateGroup(event.container.data).subscribe();
     }
-    let group: Group = this.findGroup(event.container.id);
-    if (group != null) this.updateGroup(group).subscribe();
-  }
-
-  public updateGroup(group: Group): Observable<Group> {
-    let ids = group.nodes.map((n) =>n.id);
-    return this.httpClient.put<Group>(this.apiUrl + "group", {
-      "id":group.id,
-      "name":group.name,
-      "nodeIds":ids
-    });
-  }
-
-
-  public findGroup(id: String): Group {
-    const cleanId = new Number(id.replace("group-", ""));
-    return this.board.groups.find(function (group: Group) {
-      return group.id == cleanId;
-    });
+    this.restService.updateGroup(event.previousContainer.data).subscribe();
   }
 }
