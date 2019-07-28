@@ -105,12 +105,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _board_board_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./board/board.component */ "./src/app/board/board.component.ts");
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
 /* harmony import */ var _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./create-node/create-node.component */ "./src/app/create-node/create-node.component.ts");
+/* harmony import */ var _node_node_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node/node.component */ "./src/app/node/node.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -141,7 +143,8 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
                 _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"],
                 _board_board_component__WEBPACK_IMPORTED_MODULE_7__["BoardComponent"],
-                _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__["CreateNodeComponent"]
+                _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__["CreateNodeComponent"],
+                _node_node_component__WEBPACK_IMPORTED_MODULE_10__["NodeComponent"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
@@ -176,7 +179,7 @@ module.exports = ".group{\n    border: solid #004085 1px;\n    float: left;\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"board-group-container\" cdkDropListGroup>\n    <div *ngFor=\"let group of board.groups\">\n      <h2>{{group.name}}</h2>\n      <div class=\"group\">\n        <div cdkDropList\n             [cdkDropListData]=\"group\"\n             id=\"group-{{group.id}}\" class=\"nodes\" (cdkDropListDropped)=\"drop($event)\">\n          <div id=\"node-{{node.id}}\" class=\"node\" cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n\n            {{node.title}}\n          </div>\n        </div>\n        <app-create-node [group]=\"group\"></app-create-node>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"board-group-container\" cdkDropListGroup>\n    <div *ngFor=\"let group of board.groups\">\n      <h2>{{group.name}}</h2>\n      <div class=\"group\">\n        <div cdkDropList\n             [cdkDropListData]=\"group\"\n             id=\"group-{{group.id}}\" class=\"nodes\" (cdkDropListDropped)=\"drop($event)\">\n          <div cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n            <app-node [node]=\"node\" [group]=\"group\"></app-node>\n          </div>\n        </div>\n        <app-create-node [group]=\"group\"></app-create-node>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -218,12 +221,13 @@ var BoardComponent = /** @class */ (function () {
     BoardComponent.prototype.drop = function (event) {
         if (event.previousContainer === event.container) {
             Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(event.container.data.nodes, event.previousIndex, event.currentIndex);
+            this.restService.updateGroup(event.previousContainer.data).subscribe();
         }
         else {
             Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["transferArrayItem"])(event.previousContainer.data.nodes, event.container.data.nodes, event.previousIndex, event.currentIndex);
+            this.restService.updateGroup(event.previousContainer.data).subscribe();
             this.restService.updateGroup(event.container.data).subscribe();
         }
-        this.restService.updateGroup(event.previousContainer.data).subscribe();
     };
     BoardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -439,6 +443,93 @@ var Node = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/node/node.component.css":
+/*!*****************************************!*\
+  !*** ./src/app/node/node.component.css ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".node-title {\n    width: 80%;\n}\n\n.node-delete {\n    float: left;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbm9kZS9ub2RlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0NBQ2Q7O0FBRUQ7SUFDSSxZQUFZO0NBQ2YiLCJmaWxlIjoic3JjL2FwcC9ub2RlL25vZGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ub2RlLXRpdGxlIHtcbiAgICB3aWR0aDogODAlO1xufVxuXG4ubm9kZS1kZWxldGUge1xuICAgIGZsb2F0OiBsZWZ0O1xufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/node/node.component.html":
+/*!******************************************!*\
+  !*** ./src/app/node/node.component.html ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"node-{{node.id}}\" class=\"node\">\n  <div class=\"node-title\">\n    {{node.title}}\n  </div>\n  <div class=\"node-delete\">\n    <button (mouseup)=\"delete()\">X</button>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/node/node.component.ts":
+/*!****************************************!*\
+  !*** ./src/app/node/node.component.ts ***!
+  \****************************************/
+/*! exports provided: NodeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NodeComponent", function() { return NodeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _model_node__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/node */ "./src/app/model/node.ts");
+/* harmony import */ var _rest_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../rest.service */ "./src/app/rest.service.ts");
+/* harmony import */ var _model_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../model/group */ "./src/app/model/group.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var NodeComponent = /** @class */ (function () {
+    function NodeComponent(restService) {
+        this._restService = restService;
+    }
+    NodeComponent.prototype.ngOnInit = function () {
+    };
+    NodeComponent.prototype.delete = function () {
+        var _this = this;
+        this._restService.deleteNode(this.node).subscribe(function (data) {
+            var index = _this.group.nodes.indexOf(_this.node, 0);
+            if (index > -1) {
+                _this.group.nodes.splice(index, 1);
+            }
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _model_node__WEBPACK_IMPORTED_MODULE_1__["Node"])
+    ], NodeComponent.prototype, "node", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _model_group__WEBPACK_IMPORTED_MODULE_3__["Group"])
+    ], NodeComponent.prototype, "group", void 0);
+    NodeComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-node',
+            template: __webpack_require__(/*! ./node.component.html */ "./src/app/node/node.component.html"),
+            styles: [__webpack_require__(/*! ./node.component.css */ "./src/app/node/node.component.css")]
+        }),
+        __metadata("design:paramtypes", [_rest_service__WEBPACK_IMPORTED_MODULE_2__["RestService"]])
+    ], NodeComponent);
+    return NodeComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/rest.service.ts":
 /*!*********************************!*\
   !*** ./src/app/rest.service.ts ***!
@@ -481,6 +572,9 @@ var RestService = /** @class */ (function () {
     };
     RestService.prototype.createNode = function (node) {
         return this._httpClient.post(this._apiUrl + "node", node);
+    };
+    RestService.prototype.deleteNode = function (node) {
+        return this._httpClient.delete(this._apiUrl + "node?id=" + node.id);
     };
     RestService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

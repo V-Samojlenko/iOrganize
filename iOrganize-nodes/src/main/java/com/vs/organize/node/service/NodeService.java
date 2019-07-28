@@ -43,7 +43,20 @@ public class NodeService {
       nodeRepository.save(transform);
       groupRepository.save(groupDomain);
       return transform;
+    }
+    return null;
+  }
 
+  public NodeDomain delete(long id) {
+    NodeDomain nodeDomain = nodeRepository.findById(id).orElse(null);
+    if (nodeDomain != null) {
+      GroupDomain byNodesContaining = groupRepository.findByNodesContaining(nodeDomain);
+      if (byNodesContaining != null) {
+        byNodesContaining.getNodes().remove(nodeDomain);
+        groupRepository.save(byNodesContaining);
+      }
+      nodeRepository.delete(nodeDomain);
+      return nodeDomain;
     }
     return null;
   }

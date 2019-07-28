@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { HeaderComponent } from './header/header.component';
 import { CreateNodeComponent } from './create-node/create-node.component';
+import { NodeComponent } from './node/node.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { CreateNodeComponent } from './create-node/create-node.component';
     AppComponent,
     HeaderComponent,
     BoardComponent,
-    CreateNodeComponent
+    CreateNodeComponent,
+    NodeComponent
   ],
   bootstrap: [ AppComponent ]
 })

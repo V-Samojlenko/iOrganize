@@ -28,6 +28,12 @@ public class NodeController {
     NodeDomain nodeDomain = nodeService.create(node);
     return new Gson().toJson(nodeDomain);
   }
+  @DeleteMapping(value = "/node",produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseBody
+  public String deleteNode(@RequestParam long id) {
+    NodeDomain nodeDomain = nodeService.delete(id);
+    return new Gson().toJson(nodeDomain);
+  }
 
   @GetMapping(value = "/board", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody

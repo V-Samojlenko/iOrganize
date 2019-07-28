@@ -28,13 +28,14 @@ export class BoardComponent implements OnInit {
   drop(event: CdkDragDrop<Group>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data.nodes, event.previousIndex, event.currentIndex);
+      this.restService.updateGroup(event.previousContainer.data).subscribe();
     } else {
       transferArrayItem(event.previousContainer.data.nodes,
           event.container.data.nodes,
           event.previousIndex,
           event.currentIndex);
+      this.restService.updateGroup(event.previousContainer.data).subscribe();
       this.restService.updateGroup(event.container.data).subscribe();
     }
-    this.restService.updateGroup(event.previousContainer.data).subscribe();
   }
 }

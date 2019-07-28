@@ -33,4 +33,8 @@ export class RestService {
   public createNode(node: Node): Observable<Node> {
     return this._httpClient.post<Node>(this._apiUrl + "node", node);
   }
+
+  public deleteNode(node: Node): Observable<Node> {
+    return this._httpClient.delete<Node>(this._apiUrl + "node?id=" + node.id);
+  }
 }

@@ -8,9 +8,8 @@
         <div cdkDropList
              [cdkDropListData]="group"
              id="group-{{group.id}}" class="nodes" (cdkDropListDropped)="drop($event)">
-          <div id="node-{{node.id}}" class="node" cdkDrag *ngFor="let node of group.nodes" [cdkDragData]="node">
-
-            {{node.title}}
+          <div cdkDrag *ngFor="let node of group.nodes" [cdkDragData]="node">
+            <app-node [node]="node" [group]="group"></app-node>
           </div>
         </div>
         <app-create-node [group]="group"></app-create-node>
