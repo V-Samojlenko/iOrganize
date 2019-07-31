@@ -5,7 +5,9 @@ import com.vs.organize.node.domains.BoardDomain;
 import com.vs.organize.node.forms.BoardForm;
 import com.vs.organize.node.service.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BoardCRUDService implements CRUDService<BoardDomain, BoardForm> {
   @Autowired
   private BoardRepository boardRepository;

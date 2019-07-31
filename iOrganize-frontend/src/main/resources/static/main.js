@@ -106,12 +106,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
 /* harmony import */ var _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./create-node/create-node.component */ "./src/app/create-node/create-node.component.ts");
 /* harmony import */ var _node_node_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node/node.component */ "./src/app/node/node.component.ts");
+/* harmony import */ var _create_group_create_group_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./create-group/create-group.component */ "./src/app/create-group/create-group.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -144,7 +146,8 @@ var AppModule = /** @class */ (function () {
                 _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"],
                 _board_board_component__WEBPACK_IMPORTED_MODULE_7__["BoardComponent"],
                 _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__["CreateNodeComponent"],
-                _node_node_component__WEBPACK_IMPORTED_MODULE_10__["NodeComponent"]
+                _node_node_component__WEBPACK_IMPORTED_MODULE_10__["NodeComponent"],
+                _create_group_create_group_component__WEBPACK_IMPORTED_MODULE_11__["CreateGroupComponent"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
@@ -179,7 +182,7 @@ module.exports = ".group-container {\n    display: flex;\n    flex-direction: ro
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"group-container\" cdkDropListGroup>\n    <div *ngFor=\"let group of board.groups\">\n      <div class=\"group\">\n        <h2>{{group.name}}</h2>\n        <div cdkDropList\n             [cdkDropListData]=\"group\"\n             id=\"group-{{group.id}}\" class=\"node-container\" (cdkDropListDropped)=\"drop($event)\">\n          <div cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n            <app-node [node]=\"node\" [group]=\"group\"></app-node>\n          </div>\n        </div>\n        <app-create-node [group]=\"group\"></app-create-node>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"group-container\" cdkDropListGroup>\n    <div *ngFor=\"let group of board.groups\">\n      <div class=\"group\">\n        <h2>{{group.name}}</h2>\n        <div cdkDropList\n             [cdkDropListData]=\"group\"\n             id=\"group-{{group.id}}\" class=\"node-container\" (cdkDropListDropped)=\"drop($event)\">\n          <div cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n            <app-node [node]=\"node\" [group]=\"group\"></app-node>\n          </div>\n        </div>\n        <app-create-node [group]=\"group\"></app-create-node>\n      </div>\n    </div>\n    <div class=\"group\">\n      <app-create-group [board]=\"board\"></app-create-group>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -219,14 +222,16 @@ var BoardComponent = /** @class */ (function () {
         this.restService.getBoard(1).subscribe(function (data) { return _this.board = data; });
     };
     BoardComponent.prototype.drop = function (event) {
+        var _this = this;
         if (event.previousContainer === event.container) {
             Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(event.container.data.nodes, event.previousIndex, event.currentIndex);
             this.restService.updateGroup(event.previousContainer.data).subscribe();
         }
         else {
             Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["transferArrayItem"])(event.previousContainer.data.nodes, event.container.data.nodes, event.previousIndex, event.currentIndex);
-            this.restService.updateGroup(event.previousContainer.data).subscribe();
-            this.restService.updateGroup(event.container.data).subscribe();
+            this.restService.updateGroup(event.previousContainer.data).subscribe(function (data) {
+                _this.restService.updateGroup(event.container.data).subscribe();
+            });
         }
     };
     BoardComponent = __decorate([
@@ -245,6 +250,101 @@ var BoardComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/create-group/create-group.component.css":
+/*!*********************************************************!*\
+  !*** ./src/app/create-group/create-group.component.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".create-group {\n    padding: 10px;\n}\n\n.create-group-button button {\n    padding: 0 0 0 0;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    height: 2em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY3JlYXRlLWdyb3VwL2NyZWF0ZS1ncm91cC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksY0FBYztDQUNqQjs7QUFFRDtJQUNJLGlCQUFpQjtJQUNqQixZQUFZO0lBQ1osY0FBYztJQUNkLG9CQUFvQjtJQUNwQix3QkFBd0I7SUFDeEIsWUFBWTtDQUNmIiwiZmlsZSI6InNyYy9hcHAvY3JlYXRlLWdyb3VwL2NyZWF0ZS1ncm91cC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNyZWF0ZS1ncm91cCB7XG4gICAgcGFkZGluZzogMTBweDtcbn1cblxuLmNyZWF0ZS1ncm91cC1idXR0b24gYnV0dG9uIHtcbiAgICBwYWRkaW5nOiAwIDAgMCAwO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBoZWlnaHQ6IDJlbTtcbn0iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/create-group/create-group.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/create-group/create-group.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"create-group\" [ngSwitch]=\"createOpen\">\n  <div class=\"create-group-button\" *ngSwitchCase=\"false\">\n    <button (click)=\"createGroupCreate()\">create</button>\n  </div>\n  <div class=\"create-group-form\" *ngSwitchCase=\"true\">\n    <input type=\"text\" [(ngModel)]=\"group.name\"  name=\"title\" (keydown)=\"onKeydown($event)\">\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/create-group/create-group.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/create-group/create-group.component.ts ***!
+  \********************************************************/
+/*! exports provided: CreateGroupComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateGroupComponent", function() { return CreateGroupComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _model_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/group */ "./src/app/model/group.ts");
+/* harmony import */ var _model_board__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/board */ "./src/app/model/board.ts");
+/* harmony import */ var _rest_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../rest.service */ "./src/app/rest.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var CreateGroupComponent = /** @class */ (function () {
+    function CreateGroupComponent(restService) {
+        this.createOpen = false;
+        this._restService = restService;
+        this.group = new _model_group__WEBPACK_IMPORTED_MODULE_1__["Group"]();
+    }
+    CreateGroupComponent.prototype.ngOnInit = function () {
+    };
+    CreateGroupComponent.prototype.createGroup = function () {
+        var _this = this;
+        this.group.boardId = this.board.id;
+        this._restService.createGroup(this.group).subscribe(function (data) { return _this.board.groups.push(data); });
+        this.group = new _model_group__WEBPACK_IMPORTED_MODULE_1__["Group"]();
+        this.createOpen = false;
+    };
+    CreateGroupComponent.prototype.createGroupCreate = function () {
+        this.createOpen = true;
+    };
+    CreateGroupComponent.prototype.onKeydown = function (event) {
+        if (event.key === "Enter") {
+            this.createGroup();
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _model_group__WEBPACK_IMPORTED_MODULE_1__["Group"])
+    ], CreateGroupComponent.prototype, "group", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _model_board__WEBPACK_IMPORTED_MODULE_2__["Board"])
+    ], CreateGroupComponent.prototype, "board", void 0);
+    CreateGroupComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-create-group',
+            template: __webpack_require__(/*! ./create-group.component.html */ "./src/app/create-group/create-group.component.html"),
+            styles: [__webpack_require__(/*! ./create-group.component.css */ "./src/app/create-group/create-group.component.css")]
+        }),
+        __metadata("design:paramtypes", [_rest_service__WEBPACK_IMPORTED_MODULE_3__["RestService"]])
+    ], CreateGroupComponent);
+    return CreateGroupComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/create-node/create-node.component.css":
 /*!*******************************************************!*\
   !*** ./src/app/create-node/create-node.component.css ***!
@@ -252,7 +352,7 @@ var BoardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".create-node {\n    padding: 10px;\n}\n\n.create-node-button button {\n    padding: 0 0 0 0;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY3JlYXRlLW5vZGUvY3JlYXRlLW5vZGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7Q0FDakI7O0FBRUQ7SUFDSSxpQkFBaUI7SUFDakIsWUFBWTtJQUNaLGNBQWM7SUFDZCxvQkFBb0I7SUFDcEIsd0JBQXdCO0NBQzNCIiwiZmlsZSI6InNyYy9hcHAvY3JlYXRlLW5vZGUvY3JlYXRlLW5vZGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jcmVhdGUtbm9kZSB7XG4gICAgcGFkZGluZzogMTBweDtcbn1cblxuLmNyZWF0ZS1ub2RlLWJ1dHRvbiBidXR0b24ge1xuICAgIHBhZGRpbmc6IDAgMCAwIDA7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufSJdfQ== */"
+module.exports = ".create-node {\n    padding: 10px;\n}\n\n.create-node-button button {\n    padding: 0 0 0 0;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    height: 2em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY3JlYXRlLW5vZGUvY3JlYXRlLW5vZGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7Q0FDakI7O0FBRUQ7SUFDSSxpQkFBaUI7SUFDakIsWUFBWTtJQUNaLGNBQWM7SUFDZCxvQkFBb0I7SUFDcEIsd0JBQXdCO0lBQ3hCLFlBQVk7Q0FDZiIsImZpbGUiOiJzcmMvYXBwL2NyZWF0ZS1ub2RlL2NyZWF0ZS1ub2RlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY3JlYXRlLW5vZGUge1xuICAgIHBhZGRpbmc6IDEwcHg7XG59XG5cbi5jcmVhdGUtbm9kZS1idXR0b24gYnV0dG9uIHtcbiAgICBwYWRkaW5nOiAwIDAgMCAwO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBoZWlnaHQ6IDJlbTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -403,6 +503,26 @@ var HeaderComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/model/board.ts":
+/*!********************************!*\
+  !*** ./src/app/model/board.ts ***!
+  \********************************/
+/*! exports provided: Board */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Board", function() { return Board; });
+var Board = /** @class */ (function () {
+    function Board() {
+    }
+    return Board;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/model/group.ts":
 /*!********************************!*\
   !*** ./src/app/model/group.ts ***!
@@ -450,7 +570,7 @@ var Node = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".node {\n    display: flex;\n    flex-direction: row;\n}\n\n.node-title {\n    width: 90%;\n    text-align: center;\n}\n\n.node-delete {\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbm9kZS9ub2RlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxjQUFjO0lBQ2Qsb0JBQW9CO0NBQ3ZCOztBQUVEO0lBQ0ksV0FBVztJQUNYLG1CQUFtQjtDQUN0Qjs7QUFFRDtDQUNDIiwiZmlsZSI6InNyYy9hcHAvbm9kZS9ub2RlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubm9kZSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xufVxuXG4ubm9kZS10aXRsZSB7XG4gICAgd2lkdGg6IDkwJTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5ub2RlLWRlbGV0ZSB7XG59Il19 */"
+module.exports = ".node {\n    display: flex;\n    flex-direction: row;\n}\n\n.node-title {\n    width: 90%;\n    text-align: center;\n}\n\n.node-delete {\n    margin-left: 1em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbm9kZS9ub2RlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxjQUFjO0lBQ2Qsb0JBQW9CO0NBQ3ZCOztBQUVEO0lBQ0ksV0FBVztJQUNYLG1CQUFtQjtDQUN0Qjs7QUFFRDtJQUNJLGlCQUFpQjtDQUNwQiIsImZpbGUiOiJzcmMvYXBwL25vZGUvbm9kZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5vZGUge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbn1cblxuLm5vZGUtdGl0bGUge1xuICAgIHdpZHRoOiA5MCU7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4ubm9kZS1kZWxldGUge1xuICAgIG1hcmdpbi1sZWZ0OiAxZW07XG59Il19 */"
 
 /***/ }),
 
@@ -575,6 +695,9 @@ var RestService = /** @class */ (function () {
     };
     RestService.prototype.deleteNode = function (node) {
         return this._httpClient.delete(this._apiUrl + "node?id=" + node.id);
+    };
+    RestService.prototype.createGroup = function (group) {
+        return this._httpClient.post(this._apiUrl + "group", group);
     };
     RestService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

@@ -34,8 +34,9 @@ export class BoardComponent implements OnInit {
           event.container.data.nodes,
           event.previousIndex,
           event.currentIndex);
-      this.restService.updateGroup(event.previousContainer.data).subscribe();
-      this.restService.updateGroup(event.container.data).subscribe();
+      this.restService.updateGroup(event.previousContainer.data).subscribe(data => {
+        this.restService.updateGroup(event.container.data).subscribe();
+      });
     }
   }
 }

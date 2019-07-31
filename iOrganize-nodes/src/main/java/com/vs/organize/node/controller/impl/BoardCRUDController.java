@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/node-api/node")
+@RequestMapping("/node-api/board")
 public class BoardCRUDController extends BaseCRUDController<BoardDomain, BoardForm> {
   @Autowired
   private BoardCRUDService service;
