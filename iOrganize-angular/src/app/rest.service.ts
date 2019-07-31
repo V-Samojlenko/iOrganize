@@ -37,4 +37,8 @@ export class RestService {
   public deleteNode(node: Node): Observable<Node> {
     return this._httpClient.delete<Node>(this._apiUrl + "node?id=" + node.id);
   }
+
+  public createGroup(group: Group): Observable<Group> {
+    return this._httpClient.post<Group>(this._apiUrl + "group", group);
+  }
 }

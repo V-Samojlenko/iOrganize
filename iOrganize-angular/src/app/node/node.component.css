@@ -1,7 +1,13 @@
+.node {
+    display: flex;
+    flex-direction: row;
+}
+
 .node-title {
-    float: left;
+    width: 90%;
+    text-align: center;
 }
 
 .node-delete {
-    float: left;
+    margin-left: 1em;
 }

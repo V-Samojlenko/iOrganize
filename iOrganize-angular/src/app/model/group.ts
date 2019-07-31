@@ -4,4 +4,5 @@ export class Group {
   id: number;
   name: string;
   nodes: Node[];
+  boardId: number;
 }

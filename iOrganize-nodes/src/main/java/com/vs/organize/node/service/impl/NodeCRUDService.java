@@ -1,4 +1,4 @@
-package com.vs.organize.node.service;
+package com.vs.organize.node.service.impl;
 
 import com.vs.organize.node.database.BoardRepository;
 import com.vs.organize.node.database.GroupRepository;
@@ -8,6 +8,7 @@ import com.vs.organize.node.domains.GroupDomain;
 import com.vs.organize.node.domains.NodeDomain;
 import com.vs.organize.node.forms.GroupForm;
 import com.vs.organize.node.forms.NodeForm;
+import com.vs.organize.node.service.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Component
-public class NodeService {
+public class NodeCRUDService implements CRUDService<NodeDomain, NodeForm> {
   @Autowired
   private BoardRepository boardRepository;
   @Autowired
@@ -47,7 +48,18 @@ public class NodeService {
     return null;
   }
 
-  public NodeDomain delete(long id) {
+  @Override
+  public NodeDomain read(long id) {
+    return nodeRepository.findById(id).orElse(null);
+  }
+
+  @Override
+  public NodeDomain update(NodeForm form) {
+    NodeDomain transform = form.transform();
+    return nodeRepository.save(transform);
+  }
+
+  public void delete(long id) {
     NodeDomain nodeDomain = nodeRepository.findById(id).orElse(null);
     if (nodeDomain != null) {
       GroupDomain byNodesContaining = groupRepository.findByNodesContaining(nodeDomain);
@@ -56,35 +68,13 @@ public class NodeService {
         groupRepository.save(byNodesContaining);
       }
       nodeRepository.delete(nodeDomain);
-      return nodeDomain;
     }
-    return null;
   }
 
   public BoardDomain getBoard(long boardId) {
     return boardRepository.findById(boardId).orElse(null);
   }
 
-  public GroupDomain updateGroup(GroupForm groupForm) {
-    Optional<GroupDomain> byId = groupRepository.findById(groupForm.getId());
-    if (byId.isPresent()) {
-      GroupDomain groupDomain = byId.get();
-      if (groupForm.getName() != null) {
-        groupDomain.setName(groupForm.getName());
-      }
-      groupDomain.setNodes(getNodeList(groupDomain.getNodes(), groupForm.getNodeIds()));
-      groupRepository.save(groupDomain);
-    }
-    return byId.orElse(null);
-  }
-
-  protected List<NodeDomain> getNodeList(List<NodeDomain> existingNodes, List<Long> ids) {
-    Map<Long, NodeDomain> lookUp = existingNodes.stream().collect(Collectors.toMap(g -> g.getId(), Function.identity()));
-    return ids.stream().map(id -> {
-      if (lookUp.containsKey(id)) return lookUp.get(id);
-      return nodeRepository.findById(id).orElse(null);
-    }).collect(Collectors.toList());
-  }
 
   public void setBoardRepository(BoardRepository boardRepository) {
     this.boardRepository = boardRepository;

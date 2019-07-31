@@ -18,7 +18,7 @@ public class GroupDomain {
   @OneToMany
   @Cascade(org.hibernate.annotations.CascadeType.ALL)
   private List<NodeDomain> nodes;
-  private String name;
+  private String name = "New group";
 
   public GroupDomain(List<NodeDomain> nodes) {
     this.nodes = nodes;

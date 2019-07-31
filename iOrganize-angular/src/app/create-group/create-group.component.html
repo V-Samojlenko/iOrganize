@@ -1,0 +1,8 @@
+<div class="create-group" [ngSwitch]="createOpen">
+  <div class="create-group-button" *ngSwitchCase="false">
+    <button (click)="createGroupCreate()">create</button>
+  </div>
+  <div class="create-group-form" *ngSwitchCase="true">
+    <input type="text" [(ngModel)]="node.title"  name="title" (keydown)="onKeydown($event)">
+  </div>
+</div>

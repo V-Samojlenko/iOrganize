@@ -1,14 +1,24 @@
-.group{
-    border: solid #004085 1px;
-    float: left;
-    min-width: 15%;
-    margin: 10px;
-    background-color: #adb5bd;
+.group-container {
+    display: flex;
+    flex-direction: row;
 }
-.nodes .node{
-    margin: 15px;
-    background-color: #abdde5;
-    cursor: move;
-    text-align: center;
 
+.group {
+    border: solid #004085 1px;
+    margin: 10px;
+    background-color: #d9dde1;
+}
+
+.node-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.group h2 {
+    background-color: #e5e8ea;
+    text-align: center;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
 }

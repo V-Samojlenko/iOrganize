@@ -1,5 +1,8 @@
 package com.vs.organize.node.forms;
 
+import com.vs.organize.node.domains.BoardDomain;
+import com.vs.organize.node.domains.GroupDomain;
+
 import java.util.List;
 
 /**
@@ -9,6 +12,7 @@ public class GroupForm {
   private String name;
   private long id;
   private List<Long> nodeIds;
+  private Long boardId;
 
   public GroupForm() {
   }
@@ -39,5 +43,19 @@ public class GroupForm {
 
   public void setNodeIds(List<Long> nodeIds) {
     this.nodeIds = nodeIds;
+  }
+
+  public Long getBoardId() {
+    return boardId;
+  }
+
+  public void setBoardId(Long boardId) {
+    this.boardId = boardId;
+  }
+
+  public GroupDomain transform() {
+    GroupDomain boardDomain = new GroupDomain();
+    boardDomain.setName(getName());
+    return boardDomain;
   }
 }

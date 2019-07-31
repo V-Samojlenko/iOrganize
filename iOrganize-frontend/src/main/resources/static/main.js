@@ -168,7 +168,7 @@ can be found in the LICENSE file at http://angular.io/license
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".group{\n    border: solid #004085 1px;\n    float: left;\n    min-width: 15%;\n    margin: 10px;\n    background-color: #adb5bd;\n}\n.nodes .node{\n    margin: 15px;\n    background-color: #abdde5;\n    cursor: move;\n    text-align: center;\n\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9hcmQvYm9hcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLDBCQUEwQjtJQUMxQixZQUFZO0lBQ1osZUFBZTtJQUNmLGFBQWE7SUFDYiwwQkFBMEI7Q0FDN0I7QUFDRDtJQUNJLGFBQWE7SUFDYiwwQkFBMEI7SUFDMUIsYUFBYTtJQUNiLG1CQUFtQjs7Q0FFdEIiLCJmaWxlIjoic3JjL2FwcC9ib2FyZC9ib2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdyb3Vwe1xuICAgIGJvcmRlcjogc29saWQgIzAwNDA4NSAxcHg7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgbWluLXdpZHRoOiAxNSU7XG4gICAgbWFyZ2luOiAxMHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNhZGI1YmQ7XG59XG4ubm9kZXMgLm5vZGV7XG4gICAgbWFyZ2luOiAxNXB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNhYmRkZTU7XG4gICAgY3Vyc29yOiBtb3ZlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcblxufSJdfQ== */"
+module.exports = ".group-container {\n    display: flex;\n    flex-direction: row;\n}\n\n.group {\n    border: solid #004085 1px;\n    margin: 10px;\n    background-color: #d9dde1;\n}\n\n.node-container {\n    display: flex;\n    flex-direction: column;\n    padding: 10px;\n}\n\n.group h2 {\n    background-color: #e5e8ea;\n    text-align: center;\n    width: 100%;\n    padding-left: 5px;\n    padding-right: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9hcmQvYm9hcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7SUFDZCxvQkFBb0I7Q0FDdkI7O0FBRUQ7SUFDSSwwQkFBMEI7SUFDMUIsYUFBYTtJQUNiLDBCQUEwQjtDQUM3Qjs7QUFFRDtJQUNJLGNBQWM7SUFDZCx1QkFBdUI7SUFDdkIsY0FBYztDQUNqQjs7QUFFRDtJQUNJLDBCQUEwQjtJQUMxQixtQkFBbUI7SUFDbkIsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixtQkFBbUI7Q0FDdEIiLCJmaWxlIjoic3JjL2FwcC9ib2FyZC9ib2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdyb3VwLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xufVxuXG4uZ3JvdXAge1xuICAgIGJvcmRlcjogc29saWQgIzAwNDA4NSAxcHg7XG4gICAgbWFyZ2luOiAxMHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNkOWRkZTE7XG59XG5cbi5ub2RlLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAgIHBhZGRpbmc6IDEwcHg7XG59XG5cbi5ncm91cCBoMiB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2U1ZThlYTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgcGFkZGluZy1sZWZ0OiA1cHg7XG4gICAgcGFkZGluZy1yaWdodDogNXB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -179,7 +179,7 @@ module.exports = ".group{\n    border: solid #004085 1px;\n    float: left;\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"board-group-container\" cdkDropListGroup>\n    <div *ngFor=\"let group of board.groups\">\n      <h2>{{group.name}}</h2>\n      <div class=\"group\">\n        <div cdkDropList\n             [cdkDropListData]=\"group\"\n             id=\"group-{{group.id}}\" class=\"nodes\" (cdkDropListDropped)=\"drop($event)\">\n          <div cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n            <app-node [node]=\"node\" [group]=\"group\"></app-node>\n          </div>\n        </div>\n        <app-create-node [group]=\"group\"></app-create-node>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"group-container\" cdkDropListGroup>\n    <div *ngFor=\"let group of board.groups\">\n      <div class=\"group\">\n        <h2>{{group.name}}</h2>\n        <div cdkDropList\n             [cdkDropListData]=\"group\"\n             id=\"group-{{group.id}}\" class=\"node-container\" (cdkDropListDropped)=\"drop($event)\">\n          <div cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n            <app-node [node]=\"node\" [group]=\"group\"></app-node>\n          </div>\n        </div>\n        <app-create-node [group]=\"group\"></app-create-node>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -252,7 +252,7 @@ var BoardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NyZWF0ZS1ub2RlL2NyZWF0ZS1ub2RlLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = ".create-node {\n    padding: 10px;\n}\n\n.create-node-button button {\n    padding: 0 0 0 0;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY3JlYXRlLW5vZGUvY3JlYXRlLW5vZGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7Q0FDakI7O0FBRUQ7SUFDSSxpQkFBaUI7SUFDakIsWUFBWTtJQUNaLGNBQWM7SUFDZCxvQkFBb0I7SUFDcEIsd0JBQXdCO0NBQzNCIiwiZmlsZSI6InNyYy9hcHAvY3JlYXRlLW5vZGUvY3JlYXRlLW5vZGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jcmVhdGUtbm9kZSB7XG4gICAgcGFkZGluZzogMTBweDtcbn1cblxuLmNyZWF0ZS1ub2RlLWJ1dHRvbiBidXR0b24ge1xuICAgIHBhZGRpbmc6IDAgMCAwIDA7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -263,7 +263,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"create-node-wrapper\" [ngSwitch]=\"createOpen\">\n  <div class=\"create-node\" *ngSwitchCase=\"false\">\n    <button (click)=\"createNodeCreate()\">create</button>\n  </div>\n  <div class=\"create-node-form\" *ngSwitchCase=\"true\">\n      <input type=\"text\" [(ngModel)]=\"node.title\"  name=\"title\" (keydown)=\"onKeydown($event)\">\n  </div>\n</div>\n"
+module.exports = "<div class=\"create-node\" [ngSwitch]=\"createOpen\">\n  <div class=\"create-node-button\" *ngSwitchCase=\"false\">\n    <button (click)=\"createNodeCreate()\">create</button>\n  </div>\n  <div class=\"create-node-form\" *ngSwitchCase=\"true\">\n      <input type=\"text\" [(ngModel)]=\"node.title\"  name=\"title\" (keydown)=\"onKeydown($event)\">\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -450,7 +450,7 @@ var Node = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".node-title {\n    width: 80%;\n}\n\n.node-delete {\n    float: left;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbm9kZS9ub2RlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0NBQ2Q7O0FBRUQ7SUFDSSxZQUFZO0NBQ2YiLCJmaWxlIjoic3JjL2FwcC9ub2RlL25vZGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ub2RlLXRpdGxlIHtcbiAgICB3aWR0aDogODAlO1xufVxuXG4ubm9kZS1kZWxldGUge1xuICAgIGZsb2F0OiBsZWZ0O1xufSJdfQ== */"
+module.exports = ".node {\n    display: flex;\n    flex-direction: row;\n}\n\n.node-title {\n    width: 90%;\n    text-align: center;\n}\n\n.node-delete {\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbm9kZS9ub2RlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxjQUFjO0lBQ2Qsb0JBQW9CO0NBQ3ZCOztBQUVEO0lBQ0ksV0FBVztJQUNYLG1CQUFtQjtDQUN0Qjs7QUFFRDtDQUNDIiwiZmlsZSI6InNyYy9hcHAvbm9kZS9ub2RlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubm9kZSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xufVxuXG4ubm9kZS10aXRsZSB7XG4gICAgd2lkdGg6IDkwJTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5ub2RlLWRlbGV0ZSB7XG59Il19 */"
 
 /***/ }),
 
@@ -461,7 +461,7 @@ module.exports = ".node-title {\n    width: 80%;\n}\n\n.node-delete {\n    float
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"node-{{node.id}}\" class=\"node\">\n  <div class=\"node-title\">\n    {{node.title}}\n  </div>\n  <div class=\"node-delete\">\n    <button (mouseup)=\"delete()\">X</button>\n  </div>\n</div>"
+module.exports = "<div id=\"node-{{node.id}}\" class=\"node\">\n  <div class=\"node-title\">\n    {{node.title}}\n  </div>\n  <div class=\"node-delete\">\n    <button (click)=\"delete()\">X</button>\n  </div>\n</div>"
 
 /***/ }),
 

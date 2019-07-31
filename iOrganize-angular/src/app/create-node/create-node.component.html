@@ -1,5 +1,5 @@
-<div class="create-node-wrapper" [ngSwitch]="createOpen">
-  <div class="create-node" *ngSwitchCase="false">
+<div class="create-node" [ngSwitch]="createOpen">
+  <div class="create-node-button" *ngSwitchCase="false">
     <button (click)="createNodeCreate()">create</button>
   </div>
   <div class="create-node-form" *ngSwitchCase="true">

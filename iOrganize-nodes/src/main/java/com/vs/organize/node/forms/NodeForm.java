@@ -45,6 +45,7 @@ public class NodeForm {
 
   public NodeDomain transform() {
     NodeDomain nodeDomain = new NodeDomain();
+    nodeDomain.setId(getId());
     nodeDomain.setText(getText());
     nodeDomain.setTitle(getTitle());
     return nodeDomain;

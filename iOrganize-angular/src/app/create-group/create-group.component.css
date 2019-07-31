@@ -1,8 +1,8 @@
-.create-node {
+.create-group {
     padding: 10px;
 }
 
-.create-node-button button {
+.create-group-button button {
     padding: 0 0 0 0;
     width: 100%;
     display: flex;
