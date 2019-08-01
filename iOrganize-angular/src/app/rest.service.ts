@@ -41,4 +41,8 @@ export class RestService {
   public createGroup(group: Group): Observable<Group> {
     return this._httpClient.post<Group>(this._apiUrl + "group", group);
   }
+
+  public deleteGroup(group: Group):Observable<Group> {
+    return this._httpClient.delete<Group>(this._apiUrl + "group?id=" + group.id);
+  }
 }

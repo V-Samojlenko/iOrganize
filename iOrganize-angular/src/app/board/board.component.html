@@ -2,18 +2,17 @@
   <h1>Willkommen auf dem "{{board.name}}"</h1>
 
   <div class="group-container" cdkDropListGroup>
-    <div *ngFor="let group of board.groups">
-      <div class="group">
-        <h2>{{group.name}}</h2>
-        <div cdkDropList
-             [cdkDropListData]="group"
-             id="group-{{group.id}}" class="node-container" (cdkDropListDropped)="drop($event)">
-          <div cdkDrag *ngFor="let node of group.nodes" [cdkDragData]="node">
-            <app-node [node]="node" [group]="group"></app-node>
-          </div>
+
+    <div class="group" *ngFor="let group of board.groups">
+      <h2>{{group.name}}</h2>
+      <div cdkDropList
+           [cdkDropListData]="group"
+           id="group-{{group.id}}" class="node-container" (cdkDropListDropped)="drop($event)">
+        <div cdkDrag *ngFor="let node of group.nodes" [cdkDragData]="node">
+          <app-node [node]="node" [group]="group"></app-node>
         </div>
-        <app-create-node [group]="group"></app-create-node>
       </div>
+      <app-create-node [group]="group"></app-create-node>
     </div>
     <div class="group">
       <app-create-group [board]="board"></app-create-group>

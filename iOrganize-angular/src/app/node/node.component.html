@@ -1,4 +1,4 @@
-<div id="node-{{node.id}}" class="node">
+<div id="node-{{node.id}}" class="node" (contextmenu)="openMenu($event); $event. preventDefault();">
   <div class="node-title">
     {{node.title}}
   </div>

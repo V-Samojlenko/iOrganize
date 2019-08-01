@@ -5,4 +5,11 @@ export class Group {
   name: string;
   nodes: Node[];
   boardId: number;
+
+  removeNode(node: Node) {
+    const index = this.nodes.indexOf(node, 0);
+    if (index > -1) {
+      this.nodes.splice(index, 1);
+    }
+  }
 }

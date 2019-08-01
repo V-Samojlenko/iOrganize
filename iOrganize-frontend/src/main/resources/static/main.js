@@ -101,18 +101,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _board_board_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./board/board.component */ "./src/app/board/board.component.ts");
-/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
-/* harmony import */ var _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./create-node/create-node.component */ "./src/app/create-node/create-node.component.ts");
-/* harmony import */ var _node_node_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node/node.component */ "./src/app/node/node.component.ts");
-/* harmony import */ var _create_group_create_group_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./create-group/create-group.component */ "./src/app/create-group/create-group.component.ts");
+/* harmony import */ var _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/cdk/overlay */ "./node_modules/@angular/cdk/esm5/overlay.es5.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _board_board_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./board/board.component */ "./src/app/board/board.component.ts");
+/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
+/* harmony import */ var _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./create-node/create-node.component */ "./src/app/create-node/create-node.component.ts");
+/* harmony import */ var _node_node_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node/node.component */ "./src/app/node/node.component.ts");
+/* harmony import */ var _create_group_create_group_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./create-group/create-group.component */ "./src/app/create-group/create-group.component.ts");
+/* harmony import */ var _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./context-menu/context-menu.component */ "./src/app/context-menu/context-menu.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -137,19 +141,21 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_6__["OverlayModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot([
-                    { path: '', component: _board_board_component__WEBPACK_IMPORTED_MODULE_7__["BoardComponent"] },
+                    { path: '', component: _board_board_component__WEBPACK_IMPORTED_MODULE_8__["BoardComponent"] },
                 ])
             ],
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
-                _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"],
-                _board_board_component__WEBPACK_IMPORTED_MODULE_7__["BoardComponent"],
-                _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_9__["CreateNodeComponent"],
-                _node_node_component__WEBPACK_IMPORTED_MODULE_10__["NodeComponent"],
-                _create_group_create_group_component__WEBPACK_IMPORTED_MODULE_11__["CreateGroupComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
+                _header_header_component__WEBPACK_IMPORTED_MODULE_9__["HeaderComponent"],
+                _board_board_component__WEBPACK_IMPORTED_MODULE_8__["BoardComponent"],
+                _create_node_create_node_component__WEBPACK_IMPORTED_MODULE_10__["CreateNodeComponent"],
+                _node_node_component__WEBPACK_IMPORTED_MODULE_11__["NodeComponent"],
+                _create_group_create_group_component__WEBPACK_IMPORTED_MODULE_12__["CreateGroupComponent"],
+                _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_13__["ContextMenuComponent"]
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -171,7 +177,7 @@ can be found in the LICENSE file at http://angular.io/license
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".group-container {\n    display: flex;\n    flex-direction: row;\n}\n\n.group {\n    border: solid #004085 1px;\n    margin: 10px;\n    background-color: #d9dde1;\n}\n\n.node-container {\n    display: flex;\n    flex-direction: column;\n    padding: 10px;\n}\n\n.group h2 {\n    background-color: #e5e8ea;\n    text-align: center;\n    width: 100%;\n    padding-left: 5px;\n    padding-right: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9hcmQvYm9hcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7SUFDZCxvQkFBb0I7Q0FDdkI7O0FBRUQ7SUFDSSwwQkFBMEI7SUFDMUIsYUFBYTtJQUNiLDBCQUEwQjtDQUM3Qjs7QUFFRDtJQUNJLGNBQWM7SUFDZCx1QkFBdUI7SUFDdkIsY0FBYztDQUNqQjs7QUFFRDtJQUNJLDBCQUEwQjtJQUMxQixtQkFBbUI7SUFDbkIsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixtQkFBbUI7Q0FDdEIiLCJmaWxlIjoic3JjL2FwcC9ib2FyZC9ib2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdyb3VwLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xufVxuXG4uZ3JvdXAge1xuICAgIGJvcmRlcjogc29saWQgIzAwNDA4NSAxcHg7XG4gICAgbWFyZ2luOiAxMHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNkOWRkZTE7XG59XG5cbi5ub2RlLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAgIHBhZGRpbmc6IDEwcHg7XG59XG5cbi5ncm91cCBoMiB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2U1ZThlYTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgcGFkZGluZy1sZWZ0OiA1cHg7XG4gICAgcGFkZGluZy1yaWdodDogNXB4O1xufSJdfQ== */"
+module.exports = "@media only screen and (max-width: 480px) {\n    .group {\n        flex-basis: 100%;\n    }\n}\n@media only screen and (min-width: 481px) {\n    .group {\n        flex-basis: 50%;\n    }\n}\n@media only screen and (min-width: 640px) {\n    .group {\n        flex-basis: 25%;\n    }\n}\n@media only screen and (min-width: 800px) {\n    .group {\n        flex-basis: 20%;\n    }\n}\n@media only screen and (min-width: 1024px) {\n    .group {\n        flex-basis: 15%;\n    }\n}\n.group-container {\n    display: flex;\n    flex-direction: row;\n}\n.group {\n    border: solid #004085 1px;\n    margin: 10px;\n    background-color: #d9dde1;\n    flex-grow: 0;\n    flex-shrink: 0;\n}\n.node-container {\n    display: flex;\n    flex-direction: column;\n    padding: 10px;\n}\n.group h2 {\n    background-color: #e5e8ea;\n    text-align: center;\n    width: 100%;\n    padding-left: 5px;\n    padding-right: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9hcmQvYm9hcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJO1FBQ0ksaUJBQWlCO0tBQ3BCO0NBQ0o7QUFDRDtJQUNJO1FBQ0ksZ0JBQWdCO0tBQ25CO0NBQ0o7QUFDRDtJQUNJO1FBQ0ksZ0JBQWdCO0tBQ25CO0NBQ0o7QUFDRDtJQUNJO1FBQ0ksZ0JBQWdCO0tBQ25CO0NBQ0o7QUFDRDtJQUNJO1FBQ0ksZ0JBQWdCO0tBQ25CO0NBQ0o7QUFFRDtJQUNJLGNBQWM7SUFDZCxvQkFBb0I7Q0FDdkI7QUFFRDtJQUNJLDBCQUEwQjtJQUMxQixhQUFhO0lBQ2IsMEJBQTBCO0lBQzFCLGFBQWE7SUFDYixlQUFlO0NBQ2xCO0FBRUQ7SUFDSSxjQUFjO0lBQ2QsdUJBQXVCO0lBQ3ZCLGNBQWM7Q0FDakI7QUFFRDtJQUNJLDBCQUEwQjtJQUMxQixtQkFBbUI7SUFDbkIsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixtQkFBbUI7Q0FDdEIiLCJmaWxlIjoic3JjL2FwcC9ib2FyZC9ib2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA0ODBweCkge1xuICAgIC5ncm91cCB7XG4gICAgICAgIGZsZXgtYmFzaXM6IDEwMCU7XG4gICAgfVxufVxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA0ODFweCkge1xuICAgIC5ncm91cCB7XG4gICAgICAgIGZsZXgtYmFzaXM6IDUwJTtcbiAgICB9XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDY0MHB4KSB7XG4gICAgLmdyb3VwIHtcbiAgICAgICAgZmxleC1iYXNpczogMjUlO1xuICAgIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogODAwcHgpIHtcbiAgICAuZ3JvdXAge1xuICAgICAgICBmbGV4LWJhc2lzOiAyMCU7XG4gICAgfVxufVxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxMDI0cHgpIHtcbiAgICAuZ3JvdXAge1xuICAgICAgICBmbGV4LWJhc2lzOiAxNSU7XG4gICAgfVxufVxuXG4uZ3JvdXAtY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG59XG5cbi5ncm91cCB7XG4gICAgYm9yZGVyOiBzb2xpZCAjMDA0MDg1IDFweDtcbiAgICBtYXJnaW46IDEwcHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Q5ZGRlMTtcbiAgICBmbGV4LWdyb3c6IDA7XG4gICAgZmxleC1zaHJpbms6IDA7XG59XG5cbi5ub2RlLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAgIHBhZGRpbmc6IDEwcHg7XG59XG5cbi5ncm91cCBoMiB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2U1ZThlYTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgcGFkZGluZy1sZWZ0OiA1cHg7XG4gICAgcGFkZGluZy1yaWdodDogNXB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -182,7 +188,7 @@ module.exports = ".group-container {\n    display: flex;\n    flex-direction: ro
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"group-container\" cdkDropListGroup>\n    <div *ngFor=\"let group of board.groups\">\n      <div class=\"group\">\n        <h2>{{group.name}}</h2>\n        <div cdkDropList\n             [cdkDropListData]=\"group\"\n             id=\"group-{{group.id}}\" class=\"node-container\" (cdkDropListDropped)=\"drop($event)\">\n          <div cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n            <app-node [node]=\"node\" [group]=\"group\"></app-node>\n          </div>\n        </div>\n        <app-create-node [group]=\"group\"></app-create-node>\n      </div>\n    </div>\n    <div class=\"group\">\n      <app-create-group [board]=\"board\"></app-create-group>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"board\" *ngIf=\"board != null\">\n  <h1>Willkommen auf dem \"{{board.name}}\"</h1>\n\n  <div class=\"group-container\" cdkDropListGroup>\n\n    <div class=\"group\" *ngFor=\"let group of board.groups\">\n      <h2>{{group.name}}</h2>\n      <div cdkDropList\n           [cdkDropListData]=\"group\"\n           id=\"group-{{group.id}}\" class=\"node-container\" (cdkDropListDropped)=\"drop($event)\">\n        <div cdkDrag *ngFor=\"let node of group.nodes\" [cdkDragData]=\"node\">\n          <app-node [node]=\"node\" [group]=\"group\"></app-node>\n        </div>\n      </div>\n      <app-create-node [group]=\"group\"></app-create-node>\n    </div>\n    <div class=\"group\">\n      <app-create-group [board]=\"board\"></app-create-group>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -244,6 +250,123 @@ var BoardComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_rest_service__WEBPACK_IMPORTED_MODULE_2__["RestService"]])
     ], BoardComponent);
     return BoardComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/context-menu/context-menu.component.css":
+/*!*********************************************************!*\
+  !*** ./src/app/context-menu/context-menu.component.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbnRleHQtbWVudS9jb250ZXh0LW1lbnUuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/context-menu/context-menu.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/context-menu/context-menu.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ng-template #nodeMenu let-node>\n  <section class=\"menu\">\n    <div>Details</div>\n    <div (click)=\"deleteNode(node)\">Delete</div>\n  </section>\n</ng-template>\n\n<ng-template #groupMenu let-group>\n  <section class=\"menu\">\n    <div (click)=\"deleteGroup(group)\">Delete</div>\n  </section>\n</ng-template>"
+
+/***/ }),
+
+/***/ "./src/app/context-menu/context-menu.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/context-menu/context-menu.component.ts ***!
+  \********************************************************/
+/*! exports provided: ContextMenuComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContextMenuComponent", function() { return ContextMenuComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/portal */ "./node_modules/@angular/cdk/esm5/portal.es5.js");
+/* harmony import */ var _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/overlay */ "./node_modules/@angular/cdk/esm5/overlay.es5.js");
+/* harmony import */ var _rest_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../rest.service */ "./src/app/rest.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ContextMenuComponent = /** @class */ (function () {
+    function ContextMenuComponent(restService, overlay, viewContainerRef) {
+        this.restService = restService;
+        this.overlay = overlay;
+        this.viewContainerRef = viewContainerRef;
+        this._restService = restService;
+    }
+    ContextMenuComponent.prototype.ngOnInit = function () {
+    };
+    ContextMenuComponent.prototype.open = function (_a, user) {
+        var x = _a.x, y = _a.y;
+        this.close();
+        var positionStrategy = this.overlay.position()
+            .flexibleConnectedTo({ x: x, y: y })
+            .withPositions([
+            {
+                originX: 'end',
+                originY: 'bottom',
+                overlayX: 'end',
+                overlayY: 'top',
+            }
+        ]);
+        this.overlayRef = this.overlay.create({
+            positionStrategy: positionStrategy,
+            scrollStrategy: this.overlay.scrollStrategies.close()
+        });
+        this.overlayRef.attach(new _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_1__["TemplatePortal"](this.nodeMenu, this.viewContainerRef, {
+            $implicit: user
+        }));
+    };
+    ContextMenuComponent.prototype.close = function () {
+        this.sub && this.sub.unsubscribe();
+        if (this.overlayRef) {
+            this.overlayRef.dispose();
+            this.overlayRef = null;
+        }
+    };
+    ContextMenuComponent.prototype.deleteGroup = function (group) {
+        this._restService.deleteGroup(group).subscribe(function (result) {
+        });
+    };
+    ContextMenuComponent.prototype.deleteNode = function (node) {
+        this._restService.deleteNode(node).subscribe(function (result) {
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('nodeMenu', { static: false }),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"])
+    ], ContextMenuComponent.prototype, "nodeMenu", void 0);
+    ContextMenuComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-context-menu',
+            template: __webpack_require__(/*! ./context-menu.component.html */ "./src/app/context-menu/context-menu.component.html"),
+            styles: [__webpack_require__(/*! ./context-menu.component.css */ "./src/app/context-menu/context-menu.component.css")]
+        }),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_rest_service__WEBPACK_IMPORTED_MODULE_3__["RestService"], _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_2__["Overlay"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"]])
+    ], ContextMenuComponent);
+    return ContextMenuComponent;
 }());
 
 
@@ -516,6 +639,12 @@ __webpack_require__.r(__webpack_exports__);
 var Board = /** @class */ (function () {
     function Board() {
     }
+    Board.prototype.removeGroup = function (group) {
+        var index = this.groups.indexOf(group, 0);
+        if (index > -1) {
+            this.groups.splice(index, 1);
+        }
+    };
     return Board;
 }());
 
@@ -536,6 +665,12 @@ __webpack_require__.r(__webpack_exports__);
 var Group = /** @class */ (function () {
     function Group() {
     }
+    Group.prototype.removeNode = function (node) {
+        var index = this.nodes.indexOf(node, 0);
+        if (index > -1) {
+            this.nodes.splice(index, 1);
+        }
+    };
     return Group;
 }());
 
@@ -581,7 +716,7 @@ module.exports = ".node {\n    display: flex;\n    flex-direction: row;\n}\n\n.n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"node-{{node.id}}\" class=\"node\">\n  <div class=\"node-title\">\n    {{node.title}}\n  </div>\n  <div class=\"node-delete\">\n    <button (click)=\"delete()\">X</button>\n  </div>\n</div>"
+module.exports = "<div id=\"node-{{node.id}}\" class=\"node\" (contextmenu)=\"openMenu($event); $event. preventDefault();\">\n  <div class=\"node-title\">\n    {{node.title}}\n  </div>\n  <div class=\"node-delete\">\n    <button (click)=\"delete()\">X</button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -599,6 +734,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _model_node__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/node */ "./src/app/model/node.ts");
 /* harmony import */ var _rest_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../rest.service */ "./src/app/rest.service.ts");
 /* harmony import */ var _model_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../model/group */ "./src/app/model/group.ts");
+/* harmony import */ var _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../context-menu/context-menu.component */ "./src/app/context-menu/context-menu.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -612,8 +748,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var NodeComponent = /** @class */ (function () {
-    function NodeComponent(restService) {
+    function NodeComponent(restService, menu) {
+        this.menu = menu;
         this._restService = restService;
     }
     NodeComponent.prototype.ngOnInit = function () {
@@ -621,11 +759,11 @@ var NodeComponent = /** @class */ (function () {
     NodeComponent.prototype.delete = function () {
         var _this = this;
         this._restService.deleteNode(this.node).subscribe(function (data) {
-            var index = _this.group.nodes.indexOf(_this.node, 0);
-            if (index > -1) {
-                _this.group.nodes.splice(index, 1);
-            }
+            _this.group.removeNode(_this.node);
         });
+    };
+    NodeComponent.prototype.openMenu = function ($event) {
+        this.menu.open($event, this.node);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -641,7 +779,7 @@ var NodeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./node.component.html */ "./src/app/node/node.component.html"),
             styles: [__webpack_require__(/*! ./node.component.css */ "./src/app/node/node.component.css")]
         }),
-        __metadata("design:paramtypes", [_rest_service__WEBPACK_IMPORTED_MODULE_2__["RestService"]])
+        __metadata("design:paramtypes", [_rest_service__WEBPACK_IMPORTED_MODULE_2__["RestService"], _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_4__["ContextMenuComponent"]])
     ], NodeComponent);
     return NodeComponent;
 }());
@@ -698,6 +836,9 @@ var RestService = /** @class */ (function () {
     };
     RestService.prototype.createGroup = function (group) {
         return this._httpClient.post(this._apiUrl + "group", group);
+    };
+    RestService.prototype.deleteGroup = function (group) {
+        return this._httpClient.delete(this._apiUrl + "group?id=" + group.id);
     };
     RestService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
