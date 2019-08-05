@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
+import {MatMenuModule} from '@angular/material/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
@@ -13,7 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { CreateNodeComponent } from './create-node/create-node.component';
 import { NodeComponent } from './node/node.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
-import { ContextMenuComponent } from './context-menu/context-menu.component';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,8 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
     ReactiveFormsModule,
     FormsModule,
     OverlayModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: BoardComponent },
     ])
@@ -35,7 +39,7 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
     CreateNodeComponent,
     NodeComponent,
     CreateGroupComponent,
-    ContextMenuComponent
+    GroupComponent
   ],
   bootstrap: [ AppComponent ]
 })

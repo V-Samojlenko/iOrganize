@@ -1,0 +1,9 @@
+<h2>{{group.name}}</h2>
+<div cdkDropList
+     [cdkDropListData]="group"
+     id="group-{{group.id}}" class="node-container" (cdkDropListDropped)="drop($event)">
+  <div cdkDrag *ngFor="let node of group.nodes" [cdkDragData]="node">
+    <app-node [node]="node" [group]="group"></app-node>
+  </div>
+</div>
+<app-create-node [group]="group"></app-create-node>
