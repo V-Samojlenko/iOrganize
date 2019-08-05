@@ -10,11 +10,11 @@ import {Group} from "../model/group";
 })
 
 export class NodeComponent implements OnInit {
+  private _restService: RestService;
   @Input()
   node: Node;
   @Input()
   group: Group;
-  private _restService: RestService;
 
   constructor(restService: RestService) {
     this._restService = restService;
@@ -25,7 +25,13 @@ export class NodeComponent implements OnInit {
 
   delete() {
     this._restService.deleteNode(this.node).subscribe(data => {
-      this.group.removeNode(this.node);
+      this.removeNode();
     });
+  }
+  removeNode() {
+    const index = this.group.nodes.indexOf(this.node, 0);
+    if (index > -1) {
+      this.group.nodes.splice(index, 1);
+    }
   }
 }
