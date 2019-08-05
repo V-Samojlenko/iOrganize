@@ -2,9 +2,12 @@ package com.vs.organize.node.forms;
 
 import com.vs.organize.node.domains.BoardDomain;
 
+import java.util.List;
+
 public class BoardForm {
   private long id;
   private String name;
+  private List<Long> groupIds;
 
   public BoardDomain transform() {
     BoardDomain boardDomain = new BoardDomain();
@@ -27,5 +30,13 @@ public class BoardForm {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public List<Long> getGroupIds() {
+    return groupIds;
+  }
+
+  public void setGroupIds(List<Long> groupIds) {
+    this.groupIds = groupIds;
   }
 }

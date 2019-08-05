@@ -20,6 +20,15 @@ export class RestService {
     return this._httpClient.get<Board>(this._apiUrl + "board?id=" + id);
   }
 
+  public updateBoard(board: Board): Observable<Group> {
+    let ids = board.groups.map((n) => n.id);
+    return this._httpClient.put<Group>(this._apiUrl + "board", {
+      "id": board.id,
+      "name": board.name,
+      "groupIds": ids
+    });
+  }
+
   public updateGroup(group: Group): Observable<Group> {
     let ids = group.nodes.map((n) => n.id);
     return this._httpClient.put<Group>(this._apiUrl + "group", {

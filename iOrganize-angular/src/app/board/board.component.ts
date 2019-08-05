@@ -1,8 +1,7 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {Board} from '../model/board';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Group} from "../model/group";
 import {RestService} from "../rest.service";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
@@ -14,6 +13,7 @@ import {RestService} from "../rest.service";
 export class BoardComponent implements OnInit {
   public board: Board;
   private _restService: RestService;
+
   constructor(private restService: RestService) {
     this._restService = restService;
   }
@@ -22,4 +22,8 @@ export class BoardComponent implements OnInit {
     this.restService.getBoard(1).subscribe(data => this.board = data);
   }
 
+  drop(event: CdkDragDrop<Board>) {
+      moveItemInArray(this.board.groups, event.previousIndex, event.currentIndex);
+      this.restService.updateBoard(this.board).subscribe();
+  }
 }

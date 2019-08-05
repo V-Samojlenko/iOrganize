@@ -1,9 +1,8 @@
 <div class="board" *ngIf="board != null">
   <h1>Willkommen auf dem "{{board.name}}"</h1>
 
-  <div class="group-container" cdkDropListGroup>
-
-    <div class="group" *ngFor="let group of board.groups">
+  <div class="group-container" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="board" (cdkDropListDropped)="drop($event)">
+    <div class="group" *ngFor="let group of board.groups" cdkDrag [cdkDragData]="group" cdkDragLockAxis="x" >
       <app-group [group]="group" [board]="board"></app-group>
     </div>
     <div class="group">
