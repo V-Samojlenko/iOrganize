@@ -1,4 +1,8 @@
-<h2>{{group.name}}</h2>
+<div class="group-header">
+  <h2  [hidden]="editTitle" (click)="showInput()">{{group.name}}</h2>
+  <input #titleInput [hidden]="!editTitle" type="text" [(ngModel)]="group.name" name="name" (keydown)="onKeydown($event)" (focusout)="updateGroupTitle()">
+</div>
+
 <div id="group-{{group.id}}" class="node-container">
   <div *ngFor="let node of group.nodes">
     <app-node [node]="node" [group]="group"></app-node>
