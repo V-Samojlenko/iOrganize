@@ -53,9 +53,4 @@ public class GroupForm {
     this.boardId = boardId;
   }
 
-  public GroupDomain transform() {
-    GroupDomain boardDomain = new GroupDomain();
-    boardDomain.setName(getName());
-    return boardDomain;
-  }
 }

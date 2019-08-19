@@ -6,19 +6,10 @@ import com.vs.organize.node.database.NodeRepository;
 import com.vs.organize.node.domains.BoardDomain;
 import com.vs.organize.node.domains.GroupDomain;
 import com.vs.organize.node.domains.NodeDomain;
-import com.vs.organize.node.forms.GroupForm;
 import com.vs.organize.node.forms.NodeForm;
 import com.vs.organize.node.service.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Component
 public class NodeCRUDService implements CRUDService<NodeDomain, NodeForm> {

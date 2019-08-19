@@ -1,11 +1,11 @@
 package com.vs.organize.node.domains;
 
-import org.hibernate.annotations.*;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 public class GroupDomain {
@@ -14,9 +14,8 @@ public class GroupDomain {
   private long id;
   private String style;
   private int placement;
-  private int width;
   @OneToMany
-  @Cascade(org.hibernate.annotations.CascadeType.ALL)
+  @Cascade(CascadeType.ALL)
   private List<NodeDomain> nodes;
   private String name = "New group";
 
@@ -41,14 +40,6 @@ public class GroupDomain {
 
   public void setPlacement(int placement) {
     this.placement = placement;
-  }
-
-  public int getWidth() {
-    return width;
-  }
-
-  public void setWidth(int width) {
-    this.width = width;
   }
 
   public List<NodeDomain> getNodes() {

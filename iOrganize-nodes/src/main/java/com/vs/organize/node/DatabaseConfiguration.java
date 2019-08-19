@@ -5,6 +5,8 @@ import com.vs.organize.node.domains.BoardDomain;
 import com.vs.organize.node.domains.GroupDomain;
 import com.vs.organize.node.domains.NodeDomain;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +17,9 @@ import java.util.Arrays;
 
 
 @Configuration
-@EnableJpaRepositories
+@EnableAutoConfiguration
+@EnableJpaRepositories("com.vs.organize.node.database")
+@ComponentScan("com.vs.organize.node")
 public class DatabaseConfiguration {
 
   @Profile("in-memory")

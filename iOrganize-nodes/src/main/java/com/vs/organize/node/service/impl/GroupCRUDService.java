@@ -7,9 +7,12 @@ import com.vs.organize.node.domains.GroupDomain;
 import com.vs.organize.node.domains.NodeDomain;
 import com.vs.organize.node.forms.GroupForm;
 import com.vs.organize.node.service.CRUDService;
+import com.vs.organize.node.utils.NodeTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,7 +31,7 @@ public class GroupCRUDService implements CRUDService<GroupDomain, GroupForm> {
   public GroupDomain create(GroupForm form) {
     BoardDomain boardDomain = boardRepository.findById(form.getBoardId()).orElse(null);
     if (boardDomain != null) {
-      GroupDomain groupDomain = form.transform();
+      GroupDomain groupDomain = NodeTransformer.transform(form);
       groupDomain = groupRepository.save(groupDomain);
       boardDomain.getGroups().add(groupDomain);
       boardRepository.save(boardDomain);
@@ -43,6 +46,7 @@ public class GroupCRUDService implements CRUDService<GroupDomain, GroupForm> {
   }
 
   @Override
+  @Transactional
   public GroupDomain update(GroupForm groupForm) {
     Optional<GroupDomain> byId = groupRepository.findById(groupForm.getId());
     if (byId.isPresent()) {
